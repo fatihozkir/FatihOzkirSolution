@@ -1,0 +1,42 @@
+﻿@model User
+@{
+    ViewBag.Title = "Login";
+}
+@Scripts.Render("~/js/validationScripts")
+<h2>Login User</h2>
+<div class="row">
+@using (Html.BeginForm())
+{
+    <div class="col-md-6">
+
+        @Html.AntiForgeryToken()
+        <div class="input-group">
+            <span class="input-group-addon">@Html.LabelFor(model => model.Username)</span>
+            @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
+        </div>
+        <br/>
+        @Html.ValidationMessageFor(model => model.Username)
+        <br/>
+        <div class="input-group">
+            <span class="input-group-addon">@Html.LabelFor(model => model.Password)</span>
+            @Html.PasswordFor(model => model.Password, new {@class = "form-control"})
+        </div>
+        <br/>
+        @Html.ValidationMessageFor(x => x.Password)
+        <br/>
+        <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-registration-mark"></span> 
+            Register
+        </button>
+        
+    </div>
+
+    <div class="col-md-6">
+        @if (ViewBag.LoginMessage != null)
+        {
+            <div class="alert alert-warning">@ViewBag.LoginMessage</div>
+        }
+        @Html.ValidationSummary(false)
+    </div>
+}
+</div>

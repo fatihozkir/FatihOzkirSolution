@@ -1,0 +1,82 @@
+﻿@{
+    User user = null;
+    if (HttpContext.Current.Cache["loginUser"] != null)
+    {
+        user = HttpContext.Current.Cache["loginUser"] as User;
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - FatihOzkir Solution</title>
+    @Styles.Render("~/css/mainStyles")
+    @Scripts.Render("~/js/mainScripts")
+</head>
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">FatihOzkirSolution</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active">@Html.ActionLink("Home Page","Index","Home")</li>
+                    <li>@Html.ActionLink("All Users", "GetAllUsers", "User")</li>
+                    <li>@Html.ActionLink("All Skills","AllSkills","Skill")</li>
+                    
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    @if (user != null)
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-star-empty"></span> Welcome @user.Username <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/User/UserProfile"><span class="glyphicon glyphicon-user"></span> MyProfile</a></li>
+                                <li><a href="/User/UpdateUser"><span class="glyphicon glyphicon-edit"></span> Edit Profile</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-remove"></span> Delete Profile</a></li>
+                                <li><a href="/User/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="/User/Register">
+                                <span class="glyphicon glyphicon-user"></span> Register
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/User/Login">
+                                <span class="glyphicon glyphicon-log-in"></span> Login
+                            </a>
+                        </li>
+                    }
+                   
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        @Html.Partial("PopupPartial")
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year &nbsp; FatihOzkirSolution</p>
+        </footer>
+    </div>
+
+   
+</body>
+</html>

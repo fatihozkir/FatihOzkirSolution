@@ -1,0 +1,78 @@
+﻿@model User
+@{
+    ViewBag.Title = "Register";
+}
+<script>
+    $(function () {
+
+        $("#username").keyup(function() {
+            var username = $(this).val();
+            var Username = { username:username };
+            $.post("/User/UserControl",
+                Username,
+                function (result) {
+                    if (result == true) {
+                        $("#infoUsername").html("<br><div class='alert alert-warning'>This user name can not useable. Please change your username !</div>");
+                    }
+                    else
+                    {
+                        $("#infoUsername").html("<br><div class='alert alert-success'>This user name is available.</div>");
+                    }
+
+                });
+        });       
+    });
+  
+</script>
+@Scripts.Render("~/js/validationScripts")
+<h2>Register User</h2>
+<div class="row">
+@using (Html.BeginForm())
+{
+    <div class="col-md-6">
+
+        @Html.AntiForgeryToken()
+
+
+        <div class="input-group">
+            <span class="input-group-addon">@Html.LabelFor(model => model.Name)</span>
+            @Html.TextBoxFor(model => model.Name, new {@class = "form-control"})
+        </div>
+        @Html.ValidationMessageFor(model => model.Name)
+        <br/>
+        <div class="input-group">
+            <span class="input-group-addon">@Html.LabelFor(model => model.Surname)</span>
+            @Html.TextBoxFor(model => model.Surname, new {@class = "form-control"})
+
+        </div>
+        @Html.ValidationMessageFor(model => model.Surname)
+        <br/>
+        <div class="input-group">
+            <span class="input-group-addon">@Html.LabelFor(model => model.Username)</span>
+            @Html.TextBoxFor(model => model.Username, new {@class = "form-control", id = "username"})
+
+        </div>
+
+        <div id="infoUsername"></div>
+        @Html.ValidationMessageFor(model => model.Username)
+        <br/>
+        <div class="input-group">
+            <span class="input-group-addon">@Html.LabelFor(model => model.Password)</span>
+            @Html.PasswordFor(model => model.Password, new {@class = "form-control"})
+        </div>
+        @Html.ValidationMessageFor(model => model.Password)
+        <br/>
+        <button type="submit" class="btn btn-primary" id="btnRegister">Register</button>
+       
+    </div>
+    <div class="col-md-6">
+        @if (ViewData["exception"] != null)
+        {
+            <div class="alert alert-warning">@ViewData["exception"]</div>
+        }
+        <br/>
+        @Html.ValidationSummary(false)
+    </div>
+}
+</div>
+

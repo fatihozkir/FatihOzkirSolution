@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "My Profile";
+    Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+    User getCacheUser=new User();
+    if (HttpContext.Current.Cache["loginUser"] != null)
+    {
+        getCacheUser = HttpContext.Current.Cache["loginUser"] as User;
+    }
+}
+<h2>My Profile</h2>
+@if (getCacheUser != null)
+{
+    Html.RenderAction("UserDetailPartialByUserId", "User",new{userId=getCacheUser.UserId});
+}
+

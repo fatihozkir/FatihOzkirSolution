@@ -1,0 +1,44 @@
+﻿@model SkillViewModel
+    @{
+        Layout = "../Shared/_Layout.cshtml";
+    }
+@{
+    ViewBag.Title = "GetAllUsers";
+    WebGrid skillGrid = new WebGrid(source: Model.SkillList, columnNames: new[] { "SkillId", "SkillHeader" }, defaultSort: "SkillHeader", rowsPerPage: 5, canPage: true, canSort: true, pageFieldName: "pageId", sortFieldName: "sorted", sortDirectionFieldName: "direction", ajaxUpdateContainerId: "skillsGrid", selectionFieldName: "SkillId");
+}
+
+<h2>GetAllUsers</h2>
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            <div class="col-md-3 mb-3">
+                Search User:
+            </div>
+            <div class="col-md-3 mb-3">
+                @Html.TextBox("searchSkill", null, null, new { placeholder = "Please Enter A Value For Searching", @class = "form-control" })
+            </div>
+            <div class="col-md-3 mb-3">
+                <button type="submit" class="btn btn-primary">Search Skill</button>
+            </div>
+        }
+    </div>
+
+</div>
+<div class="row">
+    <br />
+    <div class="col-md-12">
+        @skillGrid.GetHtml(
+            displayHeader: true, fillEmptyRows: false, mode: WebGridPagerModes.All, numericLinksCount: 3,
+            firstText: "[First]", lastText: "[Last]",
+            previousText: "[Prev]",
+            columns: new[] {  skillGrid.Column("", header:"", format:
+            @<text>
+                @Ajax.ActionLink("Get Available Users", "SkillFilteredUsers",
+                        new { skillId = item.SkillId}, new AjaxOptions { UpdateTargetId = "skillsGrid" },
+                        new { @class = "btn btn-info btn-xs" })
+            </text>),skillGrid.Column("SkillHeader")},
+            nextText: "[Next]", htmlAttributes: new { id = "usersGrid" }, tableStyle: "table table-striped table-condensed  table-hover"
+            )
+    </div>
+</div>

@@ -1,0 +1,57 @@
+﻿@model UserSkillRateViewModel
+<div class="row">
+    <div class="col-md-6">
+        <div class="col-md-12">
+            <div class="text-center">
+                <h4>UserDetail</h4>
+                <img src="https://image.flaticon.com/icons/png/512/306/306473.png" width="20%" height="20%" alt="userPng"/>
+            </div>
+        </div>
+        <hr />
+        <div class="col-md-12">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    Username: @Model.user.Username
+                </li>
+                <li class="list-group-item">
+                    Name&Surname: @(Model.user.Name + " " + Model.user.Surname)
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-12">
+            <div class="text-center">
+                <h4>User Skills</h4>
+                <img src="https://www.shareicon.net/download/2017/01/06/868283_pencil_512x512.png" width="20%" height="20%" alt="userPng" />
+            </div>
+        </div>
+        <hr />
+        @if (Model.SkillRateList.Count>0)
+        {
+            <ul class="list-group" id="skillList">
+                @foreach (var item in Model.SkillRateList)
+                {
+
+                    <li class="list-group-item">
+                        @item.skill.SkillHeader&nbsp;&nbsp;
+                        @for (int i = 0; i < item.Rate; i++)
+                        {
+                            <span class="glyphicon glyphicon-star"></span>
+                        }
+                    </li>
+                }
+            </ul>
+            <ul class="pagination"></ul>
+        }
+        else
+        {
+            <div class="alert alert-info">This User Did Not Add A Skill Yet.</div>
+        }
+
+    </div>
+    
+
+</div>
+@Scripts.Render("~/js/pagerScripts")

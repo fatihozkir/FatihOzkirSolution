@@ -1,0 +1,56 @@
+﻿@model List<UserSkillsDTO>
+@{
+    ViewBag.Title = "SkillFilteredUsers";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <h4>
+                Last Added Skills
+            </h4>
+            @{ Html.RenderAction("LastAddedSkills", "Skill");}
+        </div>
+        <div class="col-md-10">
+            <h4>
+                Skill Filtered Users
+            </h4>
+            @if (TempData["Exception"] != null)
+            {
+                <div class="alert alert-info">@TempData["Exception"]</div>
+            }
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-4">
+                    <div class="card ">
+                        <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
+                        <div class="avatar">
+                            <img src="https://image.flaticon.com/icons/png/512/306/306473.png" alt=""/>
+                        </div>
+                        <div class="content">
+                            <p>
+                                @(item.User.Name + " " + item.User.Surname)<br/>
+                                @item.User.Username<br/>
+                                
+                            </p>
+                            <p>
+                                Skill Name: @item.Skill.SkillHeader<br />
+                                User Skill Rate: @for (int i = 0; i < item.Rate; i++)
+                                                 {
+                                                     <span class="glyphicon glyphicon-star-empty"></span>
+                                                 }
+                            </p>
+                            <p>@Html.ActionLink("Details", "UserDetail", "User", new { userId = item.UserId }, new  { @class = "btn btn-primary" })</p>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+            }
+        </div>
+
+
+
+
+    </div>
+</div>
+

@@ -1,0 +1,11 @@
+C:\Users\FatihOzkir\Source\repos\FatihOzkirSolutions\FatihOzkirSolutions.Entities\bin\Debug\FatihOzkirSolutions.Entities.dll.config
+C:\Users\FatihOzkir\Source\repos\FatihOzkirSolutions\FatihOzkirSolutions.Entities\bin\Debug\FatihOzkirSolutions.Entities.dll
+C:\Users\FatihOzkir\Source\repos\FatihOzkirSolutions\FatihOzkirSolutions.Entities\bin\Debug\FatihOzkirSolutions.Entities.pdb
+C:\Users\FatihOzkir\Source\repos\FatihOzkirSolutions\FatihOzkirSolutions.Entities\bin\Debug\EntityFramework.dll
+C:\Users\FatihOzkir\Source\repos\FatihOzkirSolutions\FatihOzkirSolutions.Entities\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\FatihOzkir\Source\repos\FatihOzkirSolutions\FatihOzkirSolutions.Entities\bin\Debug\EntityFramework.xml
+C:\Users\FatihOzkir\Source\repos\FatihOzkirSolutions\FatihOzkirSolutions.Entities\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\FatihOzkir\Source\repos\FatihOzkirSolutions\FatihOzkirSolutions.Entities\obj\Debug\FatihOzkirSolutions.Entities.csprojResolveAssemblyReference.cache
+C:\Users\FatihOzkir\Source\repos\FatihOzkirSolutions\FatihOzkirSolutions.Entities\obj\Debug\FatihOzkirSolutions.Entities.csproj.CoreCompileInputs.cache
+C:\Users\FatihOzkir\Source\repos\FatihOzkirSolutions\FatihOzkirSolutions.Entities\obj\Debug\FatihOzkirSolutions.Entities.dll
+C:\Users\FatihOzkir\Source\repos\FatihOzkirSolutions\FatihOzkirSolutions.Entities\obj\Debug\FatihOzkirSolutions.Entities.pdb

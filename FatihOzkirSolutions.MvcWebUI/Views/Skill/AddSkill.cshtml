@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "AddSkill";
+    Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+}
+
+@{ Html.RenderAction("AddNewSkill");}
+@if (TempData["Exception"] != null)
+{
+    <div class="alert alert-warning">@TempData["Exception"]</div>
+}
+
+@{ Html.RenderAction("UserSkillList");}

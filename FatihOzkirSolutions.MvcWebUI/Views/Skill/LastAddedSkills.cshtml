@@ -1,0 +1,13 @@
+﻿@model SkillViewModel
+@if (Model != null)
+{
+    <ul class="list-group">
+        @foreach (var item in Model.SkillList)
+        {
+            <li class="list-group-item">
+                <span class="glyphicon glyphicon-check"></span>
+                @Html.ActionLink(item.SkillHeader,"SkillFilteredUsers",new{skillId=item.SkillId})
+            </li>
+        }
+    </ul>
+}

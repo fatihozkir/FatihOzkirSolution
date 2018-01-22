@@ -1,0 +1,42 @@
+﻿@model UserViewModel
+@{
+    ViewBag.Title = "GetAllUsers";
+    WebGrid userListGrid = new WebGrid(source: Model.UserList, columnNames: new[] { "UserId", "Name", "Surname", "Username" }, defaultSort: "Name", rowsPerPage: 5, canPage: true, canSort: true, pageFieldName: "pageId", sortFieldName: "sorted", sortDirectionFieldName: "direction", ajaxUpdateContainerId: "usersGrid",selectionFieldName:"UserId");
+}
+
+<h2>GetAllUsers</h2>
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            <div class="col-md-3 mb-3">
+                Search User:
+            </div>
+            <div class="col-md-3 mb-3">
+                @Html.TextBox("searchUser", null, null, new { placeholder = "Please Enter A Value For Searching", @class = "form-control" })
+            </div>
+            <div class="col-md-3 mb-3">
+                <button type="submit" class="btn btn-primary">Search User</button>
+            </div>
+        }
+    </div>
+    
+</div>
+<div class="row"><br/>
+    <div class="col-md-12">
+        @userListGrid.GetHtml(
+            displayHeader: true, fillEmptyRows: false, mode: WebGridPagerModes.All, numericLinksCount: 3,
+            firstText: "[First]", lastText: "[Last]",
+            previousText: "[Prev]",
+            columns: new[] {  userListGrid.Column("", header:"", format:
+                @<text>
+                    @Ajax.ActionLink("Get User Detail", "UserDetail",
+                        new { userId = item.UserId}, new AjaxOptions { UpdateTargetId = "usersGrid" },
+                        new { @class = "btn btn-info btn-xs" })
+                 </text>),userListGrid.Column("Name"), userListGrid.Column("Surname"), userListGrid.Column("Username") },
+            nextText: "[Next]", htmlAttributes: new { id = "usersGrid" }, tableStyle: "table table-striped table-condensed  table-hover",
+            headerStyle: "user"
+
+            )
+    </div>
+</div>

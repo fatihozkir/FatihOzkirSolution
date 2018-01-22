@@ -1,0 +1,86 @@
+﻿@{
+    Layout = null;
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#SkillHeader").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Skill/CompleteSkill",
+                    type: "POST",
+                    dataType: "json",
+                    data: { skillHeader: request.term },
+                    success: function (data) {
+                        response($.map(data,
+                            function (item) {
+                                return {
+                                    label: item.SkillHeader,
+                                    value: item.SkillHeader
+                                };
+                            }));
+
+                    }
+                });
+            },
+            messages: {
+                noResults: "",
+                results: ""
+            }
+        });
+
+
+    });
+</script>
+<h2>My Skill</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Skill List</h3>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-info">@TempData["Error"]</div>
+                    }
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <td>Skill:</td>
+                            <td>
+                                @Html.Editor("header", new {htmlAttributes = new {@class = "form-control", id = "SkillHeader"}})
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Profiency Level</td>
+                            <td>
+                                @Html.DropDownList("Rate",new SelectListItem[]{
+                                    new SelectListItem() {Text = "Beginner",Value = "1"},
+                                    new SelectListItem() {Text = "Pre-Intermediate",Value="2"},
+                                    new SelectListItem() {Text = "Indermediate",Value="3"},
+                                    new SelectListItem() {Text = "upper-intermediate",Value = "4"},
+                                    new SelectListItem() {Text = "Expert",Value = "5"}
+                                }, new {@class="form-control"}
+                                    )
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <button type="submit" class="btn btn-warning">Add New Skill</button>
+                            </td>
+                        </tr>
+                    </table>
+                }
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
